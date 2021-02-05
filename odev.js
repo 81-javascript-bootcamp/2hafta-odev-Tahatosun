@@ -4,17 +4,36 @@
 
 **/
 
-var car = { 
-    registrationNumber: "GA12345",
-    brand: "Toyota",
+var car = {
+  registrationNumber: "GA12345",
+  brand: "Toyota",
 
-    displayDetails: function(){
-        console.log(this.registrationNumber + " " + this.brand);
-    }
+  displayDetails: function () {
+    console.log(this.registrationNumber + " " + this.brand);
+  }
 }
 
-var myCarDetails =  car.displayDetails;
+var myCarDetails = car.displayDetails;
 myCarDetails();
+
+
+//#region  SORU 1 ÇÖZÜMLERİ
+
+//Çözüm 1:bind
+
+var myCarDetails = car.displayDetails.bind(car);
+myCarDetails();
+
+//Çözüm 2: call
+var myCarDetails = car.displayDetails;
+myCarDetails.call(car);
+
+//Çözüm 3: apply
+
+var myCarDetails = car.displayDetails;
+myCarDetails.apply(car);
+
+//#endregion
 
 
 /** 
@@ -28,7 +47,18 @@ bosluk icerebilir, ancak bosluk haridcindeki isimler en az 2 karakterden olusmal
 **/
 
 function isValidName(name) {
-  /// your code here
+  if(typeof name == "string"){
+
+    var words = name.trim().split(" ");
+
+    for (let i = 0; i < words.length; i++) {
+      if(words[i].length<=2)  return false;      
+    }
+
+    return true;
+  }
+
+  return false;
 }
 
 
@@ -51,6 +81,16 @@ function summary(genre, year) {
   )
 }
 
+//#region SORU 3 ÇÖZÜMLERİ
 
+//Çözüm 1: call
+summary.call(book, "dystopian", "1932");
 
+//Çözüm 2: apply
+summary.apply(book, ["dystopian", "1932"]);
 
+//Çözüm 3: bind
+var summaryBindedFunc = summary.bind(book, "dystopian", "1932");
+summaryBindedFunc();
+
+//#endregion
